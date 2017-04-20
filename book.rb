@@ -1,8 +1,8 @@
 class Book
-  attr_reader :title, :author
+
+  attr_accessor :title, :author
 
   def initialize(title, author)
-    raise TypeError, author unless author.instance_of? Author
     @title, @author = title, author
   end
 
