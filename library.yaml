@@ -19,6 +19,11 @@ books:
   author: &2 !ruby/object:Author
     name: Efremov
     biography: ''
+- !ruby/object:Book
+  title: Tais Af
+  author: &3 !ruby/object:Author
+    name: Efremov
+    biography: ''
 orders:
 - !ruby/object:Order
   book: Rob Roy, V Scott
@@ -91,6 +96,13 @@ readers:
   city: 
   street: 
   house: 
+- !ruby/object:Reader
+  name: Chak
+  email: jjj@i.ua
+  city: 
+  street: 
+  house: 
 authors:
 - *1
 - *2
+- *3

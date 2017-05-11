@@ -39,14 +39,6 @@ class Library
     end
   end
 
-
-  # def create_order(book, reader)
-  #   @books << book unless @books.include?(book)
-  #   @authors << book.author unless @authors.include?(book.author)
-  #   @readers << reader unless @readers.include?(reader)
-  #   @orders << Order.new(book, reader)
-  # end
-
   def often_takes_book(book)
     raise TypeError, 'Wrong book type' unless book.kind_of?(Book)
     orders = @orders.select { |order| order.book.to_s == book.to_s }
