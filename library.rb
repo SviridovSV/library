@@ -5,7 +5,6 @@ require_relative "order"
 require "yaml"
 
 class Library
-
   attr_reader :books, :orders, :readers, :authors
 
   def initialize(f = 'library.yaml')
