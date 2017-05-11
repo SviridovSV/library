@@ -4,8 +4,10 @@ lib = Library.new(f = 'library.yaml')
 
 efr = Author.new("Efremov")
 lib << efr
+
 tais = Book.new("Tais Af", efr)
 lib << tais
+
 chak = Reader.new("Chak", "jjj@i.ua")
 lib << chak
 

@@ -8,5 +8,4 @@ class Book
   def to_s
     "#{title}, #{author}"
   end
-
 end
