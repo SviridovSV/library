@@ -40,15 +40,11 @@ class Library
 
   def often_takes_book(book)
     raise TypeError, 'Wrong book type' unless book.kind_of?(Book)
-    orders = @orders.select { |order| order.book.to_s == book.to_s }
-    book_readers = orders.map { |order| order.reader }
-    book_readers.max_by { |reader| book_readers.count(reader) }
+    @orders.select { |order| order.book.to_s == book.to_s }.group_by(&:reader).max_by { |key, value| value.size }.first
   end
 
   def most_popular_book(quantity)
-    all_books = []
-    @orders.each { |order| all_books << order.book }
-    all_books.uniq.max_by(quantity) { |book| all_books.uniq.count(book) }
+    @orders.group_by(&:book).max_by(quantity) { |key, value| value.size }.to_h.keys
   end
 
   def how_many_people_ordered_one_of_three_most_popular_books
@@ -63,12 +59,4 @@ class Library
   def save_to_file(f = 'library.yaml')
     File.open(f, "w") { |f| f.write(YAML.dump(self)) } ? true : "This file doesn't exist"
   end
-
 end
-
-
-
-
-
-
-
