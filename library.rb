@@ -23,18 +23,10 @@ class Library
   end
 
   def <<(object)
-    type = object.class
-    case
-    when type == Book
-      @books << object unless @books.include?(object)
-    when type == Author
-      @authors << object unless @authors.include?(object)
-    when type == Reader
-      @readers << object unless @readers.include?(object)
-    when type == Order
-      @orders << object unless @orders.include?(object)
-    else
-      "You may add only Book, Author, Reader or Order"
+    %w[order book reader author].each do |value|
+      if object.class == value.capitalize
+        instance_variable_get("@#{value}s") << object
+      end
     end
   end
 
@@ -48,12 +40,7 @@ class Library
   end
 
   def how_many_people_ordered_one_of_three_most_popular_books
-    best_books = most_popular_book(3)
-    count_people = {}
-    best_books.each do |book|
-      count_people[book.to_s] = @orders.find_all { |order| order.book.to_s == book.to_s }.count
-    end
-    count_people.each {|book, count| "#{book}:#{count}"}
+    most_popular_book(3).map { |book| @orders.find_all { |order| order.book.to_s == book.to_s }.group_by(&:reader).uniq }.uniq.count
   end
 
   def save_to_file(f = 'library.yaml')

@@ -1,6 +1,6 @@
 require_relative "library"
 
-lib = Library.new(f = 'library.yaml')
+lib = Library.new('library.yaml')
 
 efr = Author.new("Efremov")
 lib << efr
