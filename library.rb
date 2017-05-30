@@ -36,11 +36,11 @@ class Library
   end
 
   def most_popular_book(quantity)
-    orders_with_popular_books(quantity).to_h.keys
+    orders_with_popular_books(quantity).keys
   end
 
   def how_many_people_ordered_one_of_three_most_popular_books
-    orders_with_popular_books(3).map{ |book| book.flatten[1] }.group_by(&:reader).count
+    orders_with_popular_books(3).values.flatten.group_by(&:reader).count
   end
 
   def save_to_file(f = 'library.yaml')
@@ -50,7 +50,7 @@ class Library
   private
 
   def orders_with_popular_books(quantity)
-    @orders.group_by(&:book).max_by(quantity) { |key, value| value.size }
+    @orders.group_by(&:book).max_by(quantity) { |key, value| value.size }.to_h
   end
 end
 
